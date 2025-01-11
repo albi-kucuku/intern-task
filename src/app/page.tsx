@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import PokemonCard from '../components/PokemonCard';
+import SearchBar from '../components/SearchBar';
 
 interface Pokemon {
   name: string;
@@ -13,6 +14,7 @@ interface Pokemon {
 
 const HomePage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -36,6 +38,7 @@ const HomePage = () => {
         );
 
         setPokemonList(detailedPokemon);
+        setFilteredPokemon(detailedPokemon);
       } catch (error) {
         console.error('Error fetching Pokémon:', error);
       }
@@ -44,11 +47,19 @@ const HomePage = () => {
     fetchPokemon();
   }, []);
 
+  const handleSearch = (query: string) => {
+    const filtered = pokemonList.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(query)
+    );
+    setFilteredPokemon(filtered);
+  };
+
   return (
     <div className='p-4'>
       <h1 className='mb-4 text-center text-2xl font-semibold'>Pokémons</h1>
-      <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
-        {pokemonList.map((pokemon) => (
+      <SearchBar onSearch={handleSearch} />
+      <div>
+        {filteredPokemon.map((pokemon) => (
           <PokemonCard key={pokemon.name} pokemon={pokemon} />
         ))}
       </div>
