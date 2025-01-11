@@ -1,6 +1,7 @@
 'use client';
 
 import axios from 'axios';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import PokemonCard from '../components/PokemonCard';
@@ -60,7 +61,9 @@ const HomePage = () => {
       <SearchBar onSearch={handleSearch} />
       <div>
         {filteredPokemon.map((pokemon) => (
-          <PokemonCard key={pokemon.name} pokemon={pokemon} />
+          <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
+            <PokemonCard pokemon={pokemon} />
+          </Link>
         ))}
       </div>
     </div>
