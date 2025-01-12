@@ -1,18 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
-interface SearchBarProps {
-  onSearch: (query: string) => void;
-}
+import { usePokemonContext } from '../context/PokemonContext';
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [search, setSearch] = useState('');
+const SearchBar: React.FC = () => {
+  const { searchQuery, setSearchQuery } = usePokemonContext();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value.toLowerCase();
-    setSearch(query);
-    onSearch(query);
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -20,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       <input
         type='text'
         placeholder='Search...'
-        value={search}
+        value={searchQuery}
         onChange={handleSearch}
         className='w-full border p-2'
       />
