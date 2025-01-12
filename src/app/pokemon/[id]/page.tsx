@@ -106,15 +106,15 @@ const PokemonDetailsPage = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className='p-4'>
+    <div className='min-h-screen bg-gradient-to-br from-yellow-300 to-blue-500 p-6 text-gray-800'>
       <button
-        className='mb-4 px-4 py-2 text-black hover:underline'
+        className='mb-6 text-blue-600 underline hover:text-red-500'
         onClick={() => router.push('/')}
       >
         Go Back
       </button>
 
-      <h1 className='mb-6 text-center text-3xl font-bold capitalize'>
+      <h1 className='mb-6 text-center text-4xl font-bold capitalize text-red-500'>
         {pokemon.name}
       </h1>
       <div className='flex flex-col items-center'>
@@ -123,15 +123,15 @@ const PokemonDetailsPage = ({ params }: { params: { id: string } }) => {
           height={200}
           src={pokemon.image}
           alt={pokemon.name}
-          className='mb-4'
+          className='mb-6'
         />
-        <p className='mb-2'>Types: {pokemon.types.join(', ')}</p>
-        <p className='mb-2'>Height: {pokemon.height} decimeters</p>
-        <p className='mb-4'>Weight: {pokemon.weight} hectograms</p>
-        <h2 className='mb-2 text-xl font-semibold'>Stats</h2>
+        <p className='text-lg'>Types: {pokemon.types.join(', ')}</p>
+        <p className='text-lg'>Height: {pokemon.height} decimeters</p>
+        <p className='text-lg'>Weight: {pokemon.weight} hectograms</p>
+        <h2 className='mb-4 mt-8 text-2xl font-bold text-blue-600'>Stats</h2>
         <ul className='list-disc'>
           {pokemon.stats.map((stat) => (
-            <li key={stat.name}>
+            <li key={stat.name} className='text-lg capitalize'>
               {stat.name}: {stat.value}
             </li>
           ))}

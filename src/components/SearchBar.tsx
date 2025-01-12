@@ -18,7 +18,7 @@ const SearchBar: React.FC = () => {
         placeholder='Search...'
         value={searchQuery}
         onChange={handleSearch}
-        className='w-full border p-2'
+        className='w-full rounded-lg border-2 border-blue-500 p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500'
       />
     </div>
   );

@@ -11,19 +11,21 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   return (
-    <div className='flex items-center gap-4 border-b p-4'>
+    <div className='rounded-lg border-2 border-yellow-400 bg-white p-4 shadow-lg transition hover:shadow-xl'>
       <Image
         width={80}
         height={80}
         src={pokemon.image}
         alt={pokemon.name}
-        className='flex-shrink-0'
+        className='mx-auto'
       />
       <div>
-        <h2 className='text-lg font-semibold capitalize text-gray-800'>
+        <h2 className='mt-4 text-center text-lg font-bold capitalize text-blue-500'>
           {pokemon.name}
         </h2>
-        <p className='text-sm text-gray-600'>{pokemon.types}</p>
+        <p className='mt-2 text-center text-sm text-gray-600'>
+          {pokemon.types}
+        </p>
       </div>
     </div>
   );
