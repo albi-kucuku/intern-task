@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 
+import { usePokemonContext } from '@/context/PokemonContext';
+
 interface PokemonCardProps {
   pokemon: {
     name: string;
@@ -10,6 +12,10 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+  const { team, addToTeam } = usePokemonContext();
+
+  const isInTeam = team.some((p) => p.name === pokemon.name);
+
   return (
     <div className='rounded-lg border-2 border-yellow-400 bg-white p-4 shadow-lg transition hover:shadow-xl'>
       <Image
@@ -26,6 +32,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         <p className='mt-2 text-center text-sm text-gray-600'>
           {pokemon.types}
         </p>
+        {!isInTeam && (
+          <button
+            className='text-green-500 hover:underline'
+            onClick={() => addToTeam(pokemon)}
+          >
+            Add to Team
+          </button>
+        )}
       </div>
     </div>
   );

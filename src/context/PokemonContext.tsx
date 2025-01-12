@@ -14,6 +14,9 @@ interface PokemonContextProps {
   filteredPokemon: Pokemon[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  team: Pokemon[];
+  addToTeam: (pokemon: Pokemon) => void;
+  removeFromTeam: (pokemonName: string) => void;
 }
 
 const PokemonContext = createContext<PokemonContextProps | undefined>(
@@ -26,6 +29,17 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [team, setTeam] = useState<Pokemon[]>([]);
+
+  const addToTeam = (pokemon: Pokemon) => {
+    if (!team.find((p) => p.name === pokemon.name)) {
+      setTeam([...team, pokemon]);
+    }
+  };
+
+  const removeFromTeam = (pokemonName: string) => {
+    setTeam(team.filter((p) => p.name !== pokemonName));
+  };
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -72,6 +86,9 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
         filteredPokemon,
         searchQuery,
         setSearchQuery,
+        team,
+        addToTeam,
+        removeFromTeam,
       }}
     >
       {children}
